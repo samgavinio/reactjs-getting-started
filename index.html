@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+      <head>
+          <title>Getting Started with ReactJS</title>
+          <script src="build/react.js"></script>
+          <script src="build/JSXTransformer.js"></script>
+          <link rel="stylesheet" href="bootstrap.css">
+          <style>
+               .task-app-container {
+                   margin-top: 20px;
+               }
+          </style>
+      </head>
+
+      <body>
+          <div class="container">
+              <div class="text-center">
+                   <h1>ReactJS Introduction</h1>
+              </div>
+              <div id="react-container"><div>
+          </div>
+      </body>
+
+      <script type="text/jsx">
+        /*** @jsx React.DOM */
+        
+        var defaultData = [
+            {taskid: 1, taskname: 'Learn ReactJS', author: 'Mark Zuckerberg'},
+            {taskid: 2, taskname: 'Rewrite symfony2 codebase', author: 'Fabien Potencier'},
+            {taskid: 3, taskname: 'Unit test AngularJS code', author: 'Misko Hevery'}
+        ];
+
+        var Task = React.createClass({
+            handleDeleteTask: function(e){
+                this.props.onTaskDelete(this.props.taskid);
+                e.preventDefault();
+            },
+            render: function(){
+                return (
+                    <tr>
+                        <td>
+                             {this.props.taskname}
+                        </td>
+                        <td>
+                             {this.props.author}
+                        </td>
+                        <td>
+                             <button type="submit" className="btn btn-default" onClick={this.handleDeleteTask}>Delete</button>
+                        </td>
+                    </tr>
+                )
+            }
+        });
+
+        var TaskTable = React.createClass({
+            onTaskDelete: function(taskid){
+                this.props.onTaskDelete( taskid );
+            },
+            render: function(){
+                var that = this;
+                var tasks = this.props.taskData.map(function(task, i){
+                    return <Task taskname={task.taskname} author={task.author} taskid={task.taskid} onTaskDelete={that.onTaskDelete} key={i}/>
+                });
+                return (
+                    <table className="table table-striped">
+                        <tbody>
+                        <tr>
+                             <th>Task</th>
+                             <th>Author</th>
+                             <th></th>
+                        </tr>
+                        {tasks}
+                        </tbody>
+                    </table>
+                )
+            }
+        });
+
+        var TaskTracker = React.createClass({
+            getInitialState: function(){
+                var taskListLength = this.props.taskData.length; 
+                return {taskData:this.props.taskData, taskname:'', author:'', size: taskListLength}
+            },
+            handleSubmit: function(e){
+                 e.preventDefault();                 
+                 var newTaskListLength = this.state.size + 1;
+                 this.state.taskData.push({taskid: newTaskListLength, taskname:this.state.taskname, author:this.state.author});
+                 this.setState({taskname:'', author:'', size: newTaskListLength});
+            },          
+            onChangeTaskname: function(e){
+                 this.setState({taskname:e.target.value});
+            },
+            onChangeAuthor: function(e){
+                 this.setState({author:e.target.value});
+            },   
+            onTaskDelete: function(taskid){
+      		    for( var i = 0; i < this.state.size; i++ ) {
+      			    if( parseInt(this.state.taskData[i].taskid, 10) === parseInt(taskid, 10) ) {
+      				    this.state.taskData.splice(i,1);
+      		            this.setState({data: this.state.taskData, size: this.state.taskData.length});
+      				    break;
+      			    }
+      		    }      
+            },
+            render: function(){
+                return (
+                    <div>
+                        <div className="row">
+                            <form onSubmit={this.handleSubmit}>
+                                 <div className="form-group">
+                                     <label htmlFor="taskname">Taskname</label>
+                                     <input id="taskname" className="form-control" type="text" value={this.state.taskname} onChange={this.onChangeTaskname}/>
+                                 </div>
+                                 <div className="form-group">
+                                     <label htmlFor="author">Author</label>
+                                     <input id="author" className="form-control" type="text" value={this.state.author} onChange={this.onChangeAuthor}/>
+                                 </div>
+                                 <button type="submit" className="btn btn-default">Add a new task</button>
+                            </form>
+                        </div>
+                    
+                        <div className="row task-app-container">
+                             <TaskTable taskData={this.state.taskData} onTaskDelete={this.onTaskDelete}/>
+                        </div>
+                    </div>
+                )
+            }
+        });
+
+        React.render(<TaskTracker taskData={defaultData}/>,document.getElementById('react-container'));
+
+      </script>
+
+
+</html>

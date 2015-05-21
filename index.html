@@ -94,13 +94,13 @@
                  this.setState({author:e.target.value});
             },   
             onTaskDelete: function(taskid){
-      		    for( var i = 0; i < this.state.size; i++ ) {
-      			    if( parseInt(this.state.taskData[i].taskid, 10) === parseInt(taskid, 10) ) {
-      				    this.state.taskData.splice(i,1);
-      		            this.setState({data: this.state.taskData, size: this.state.taskData.length});
-      				    break;
-      			    }
-      		    }      
+                for( var i = 0; i < this.state.size; i++ ) {
+                    if( parseInt(this.state.taskData[i].taskid, 10) === parseInt(taskid, 10) ) {
+                        this.state.taskData.splice(i,1);
+                        this.setState({data: this.state.taskData, size: this.state.taskData.length});
+                        break;
+                    }
+                }      
             },
             render: function(){
                 return (

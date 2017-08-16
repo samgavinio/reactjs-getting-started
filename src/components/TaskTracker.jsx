@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import TaskTable from './TaskTable.jsx';
+import { connect } from 'react-redux';
+import * as actions from '../actions/tasks';
 
 class TaskTracker extends Component {
     render() {
-        const sampleContent = [
-            { id: 1, name: 'Test Task', author: 'Sam Gavinio' }
-        ];
-
         return (
             <div>
                 <div className="row">
@@ -23,11 +21,17 @@ class TaskTracker extends Component {
                     </form>
                 </div>
                 <div className="row task-app-container">
-                    <TaskTable taskData={sampleContent}/>
+                    <TaskTable taskData={this.props.tasks} deleteTask={this.props.deleteTask}/>
                 </div>
             </div>
         )
     };
 }
 
-export default TaskTracker;
+const mapStateToProps = (state) => {
+    return {
+        tasks: state.tasks
+    }
+}
+
+export default connect(mapStateToProps, actions)(TaskTracker);

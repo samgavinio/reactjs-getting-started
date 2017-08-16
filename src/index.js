@@ -12,7 +12,6 @@ const store = createStore(reducer, {
 });
 
 store.dispatch(addTask({
-    id: 1,
     author: 'Mintegrations',
     name: 'Getting Started with React and Redux'
 }));

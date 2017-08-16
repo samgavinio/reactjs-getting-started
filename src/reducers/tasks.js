@@ -1,12 +1,21 @@
 export default (state = {}, action) => {
     switch(action.type) {
-    case 'DELETE_TASK':
-        return state;
-    case 'ADD_TASK':
-        let tasks = state.tasks;
-        tasks.push(action.task);
+        case 'DELETE_TASK':
+            const tasks = state.tasks.filter( (item, index) => {
+                return item.id != action.id
+            });
 
-        return Object.assign({}, state, { tasks })
+            return Object.assign({}, state, {
+                tasks
+            });
+        case 'ADD_TASK':
+            const newTask = Object.assign({}, action.task, {
+                id: `${action.task.name}.${action.task.author}`,
+            });
+
+            return Object.assign({}, state, {
+                tasks: [...state.tasks, newTask]
+            });
     }
 
     return state;

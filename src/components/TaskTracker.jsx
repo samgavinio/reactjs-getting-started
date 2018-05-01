@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
-import TaskTable from './TaskTable.jsx';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import * as actions from '../actions/tasks';
+import TaskTable from './TaskTable';
 
 class TaskTracker extends Component {
-
     constructor(props) {
         super(props);
 
@@ -53,17 +49,4 @@ class TaskTracker extends Component {
     };
 }
 
-const mapStateToProps = (state) => {
-    return {
-        tasks: state.tasks
-    }
-}
-
-const mapDispatchToProps = (dispatch) => {
-    return Object.assign(
-        { dispatch },
-        bindActionCreators(actions, dispatch)
-    );
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(TaskTracker);
+export default TaskTracker;

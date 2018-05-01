@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TaskTracker from './components/TaskTracker.jsx';
+import AppContainer from './containers/AppContainer';
 
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
@@ -18,7 +18,7 @@ store.dispatch(addTask({
 
 ReactDOM.render(
     <Provider store={store}>
-        <TaskTracker/>
+      <AppContainer />
     </Provider>,
     document.getElementById('root')
 );

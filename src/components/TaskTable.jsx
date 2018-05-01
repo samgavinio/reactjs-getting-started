@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Task from './Task.jsx';
+import Task from './Task';
 
 class TaskTable extends Component {
     render() {

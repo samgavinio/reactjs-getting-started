@@ -4,16 +4,33 @@ This application is a very simple task manager to demonstrate how you can use re
 
 The sample app allows you to add new task and delete existing ones, nothing fancy.
 
-* Install the dependencies by running
+### Get running locally
+
+Install the dependencies by running
 
 ```
-yarn install
+    yarn install
 ```
 
-* Start the webpack dev server app by executing
+Start the webpack dev server app by executing
 
 ```
-yarn start
+    yarn start
 ```
 
 You shound now be able to view the app by going to http://localhost:8080 in your browser.
+
+### Alternatively, you can spin-up a docker container in your local environment
+
+The container is orchestrated using [docker-compose](https://docs.docker.com/compose)
+
+```
+    docker-compose up
+```
+
+Access the apps by going to
+
+```
+    docker-machine ip
+    # Then going to: http://[docker-machine ip]:8080
+```

@@ -1,13 +1,14 @@
-export const deleteTask = (id) => {
-    return {
-        type: 'DELETE_TASK',
-        id
-    };
-};
+import {
+  DELETE_TASK,
+  ADD_TASK,
+} from './constants';
 
-export const addTask = (task) => {
-    return {
-        type: 'ADD_TASK',
-        task
-    };
-}
+export const deleteTask = id => ({
+  type: DELETE_TASK,
+  id
+});
+
+export const addTask = task => ({
+  type: ADD_TASK,
+  task
+})

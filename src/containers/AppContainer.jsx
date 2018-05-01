@@ -5,6 +5,8 @@ import TaskTracker from '../components/TaskTracker';
 
 const mapStateToProps = state => ({
   tasks: state.tasks,
+  taskAuthor: state.form.author,
+  taskName: state.form.name,
 });
 
 const mapDispatchToProps = dispatch => Object.assign(

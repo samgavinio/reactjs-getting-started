@@ -1,6 +1,9 @@
 import {
   DELETE_TASK,
   ADD_TASK,
+  FORM_CHANGE_TASK_NAME,
+  FORM_CHANGE_TASK_AUTHOR,
+  FORM_SUBMIT,
 } from './constants';
 
 export const deleteTask = id => ({
@@ -8,7 +11,21 @@ export const deleteTask = id => ({
   id
 });
 
-export const addTask = task => ({
+export const addTask = (task) => ({
   type: ADD_TASK,
-  task
-})
+  task,
+});
+
+export const changeTaskName = name => ({
+  type: FORM_CHANGE_TASK_NAME,
+  name
+});
+
+export const changeTaskAuthor = author => ({
+  type: FORM_CHANGE_TASK_AUTHOR,
+  author
+});
+
+export const submitForm = () => ({
+  type: FORM_SUBMIT,
+});
